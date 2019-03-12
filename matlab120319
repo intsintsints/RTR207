@@ -1,0 +1,1011 @@
+Classroom License -- for classroom instructional use only.
+
+>> [1,2,6]
+
+ans =
+
+     1     2     6
+
+>> a*2
+Undefined function or variable 'a'.
+ 
+>> a=[1,2,6]
+
+a =
+
+     1     2     6
+
+>> a*
+ a*
+   ↑
+Error: Invalid expression. Check for missing or extra characters.
+ 
+>> a*2
+
+ans =
+
+     2     4    12
+
+>> whos
+  Name      Size            Bytes  Class     Attributes
+
+  a         1x3                24  double              
+  ans       1x3                24  double              
+
+>> syms x
+>> x
+ 
+x =
+ 
+x
+ 
+>> f= x^2+1
+ 
+f =
+ 
+x^2 + 1
+ 
+>> %x^2+1 = 0
+>> solve(f)
+ 
+ans =
+ 
+ -1i
+  1i
+ 
+>> solve(f,x)
+ 
+ans =
+ 
+ -1i
+  1i
+ 
+>> syms x'clear'
+>> syms x'real'
+>> solve(f,x)
+ 
+ans =
+ 
+ -1i
+  1i
+ 
+>> syms x'positive'
+>> solve(f,x)
+ 
+ans =
+ 
+ -1i
+  1i
+ 
+>> whos
+  Name           Size            Bytes  Class     Attributes
+
+  a              1x3                24  double              
+  ans            2x1                 8  sym                 
+  f              1x1                 8  sym                 
+  x              1x1                 8  sym                 
+  xclear         1x1                 8  sym                 
+  xpositive      1x1                 8  sym                 
+  xreal          1x1                 8  sym                 
+
+>> f=x^2-1
+ 
+f =
+ 
+x^2 - 1
+ 
+>> double(solve(f,x))
+
+ans =
+
+    -1
+     1
+
+>> syms a
+>> f= x^2 -a
+ 
+f =
+ 
+x^2 - a
+ 
+>> double(solve(f,x))
+Error using symengine
+Unable to convert expression into double array.
+
+Error in sym/double (line 661)
+        Xstr = mupadmex('symobj::double', S.s, 0);
+ 
+>> pretty(f)
+ 2
+x  - a
+
+>> f=x^2-1
+ 
+f =
+ 
+x^2 - 1
+ 
+>> diff(f)
+ 
+ans =
+ 
+2*x
+ 
+>> int(f)
+ 
+ans =
+ 
+(x*(x^2 - 3))/3
+ 
+>> t=[2,4,6]
+
+t =
+
+     2     4     6
+
+>> diff(t)
+
+ans =
+
+     2     2
+
+>> izt = int(f)
+ 
+izt =
+ 
+(x*(x^2 - 3))/3
+ 
+>> pretty(izt)
+    2
+x (x  - 3)
+----------
+     3
+
+>> help simplify
+--- help for sym/simplify ---
+
+ simplify Symbolic simplification.
+    simplify(S) simplifies each element of the symbolic matrix S.
+    
+    simplify(S,N) or, equivalently, simplify(S,'Steps',N),
+    searches for a simplification in N steps. The default value of N is 1.
+    
+    simplify(S,'Seconds',T) aborts the search for a simpler version
+    at the next end of a simplification step after T seconds. The results
+    will depend on the speed and system load of your computer and may
+    not be reproducible.
+    
+    simplify(S,'IgnoreAnalyticConstraints',VAL) controls the level of 
+    mathematical rigor to use on the analytical constraints while simplifying 
+    (branch cuts, division by zero, etc). The options for VAL are TRUE or 
+    FALSE. Specify TRUE to relax the level of mathematical rigor
+    in the rewriting process. The default is FALSE.
+    
+    simplify(S, 'Criterion', 'preferReal') 
+    discourages simplify from returning results 
+    containing complex numbers.
+ 
+    Examples: 
+       syms x c alpha beta
+ 
+       simplify(sin(x)^2 + cos(x)^2)  returns  1.
+       simplify(exp(c*log(sqrt(alpha+beta))))  returns  (alpha + beta)^(c/2).
+       simplify(sqrt(x^2))  returns  sqrt(x^2),
+       simplify(sqrt(x^2),'IgnoreAnalyticConstraints',true)  returns  x.
+       u = symunit;
+       simplify(u.m+u.mm) returns  (1001/1000)*[m].
+ 
+    See also symunit, sym/factor, sym/expand, sym/collect.
+
+    Other functions named simplify
+
+>> limit(1/(x-1),x,1)
+ 
+ans =
+ 
+NaN
+ 
+>> limit(1/(x-1),x,1,'left')
+ 
+ans =
+ 
+-Inf
+ 
+>> vpa(sqrt(2))
+ 
+ans =
+ 
+1.4142135623730950488016887242097
+ 
+>> vpa(pi)
+ 
+ans =
+ 
+3.1415926535897932384626433832795
+ 
+>> vpa(sqrt(pi),64)
+ 
+ans =
+ 
+1.772453850905515881919427556567825376987457275390625
+ 
+>> ezplot(f)
+>> izt=(x^2-5)/(x-1)
+ 
+izt =
+ 
+(x^2 - 5)/(x - 1)
+ 
+>> ezplot(izt)
+>> ezplot(izt,[-12-5])
+Warning: Function failed to evaluate on array inputs; vectorizing the function
+may speed up its evaluation and avoid the need to loop over array elements. 
+> In ezplotfeval (line 56)
+  In ezplot>ezparam (line 405)
+  In ezplot (line 179)
+  In sym/ezplot (line 72) 
+Unable to perform assignment because the left and right sides have a different
+number of elements.
+
+Error in ezplotfeval/applyfun (line 76)
+           z(i) = feval(f,x(i));
+
+Error in ezplotfeval (line 63)
+    z = applyfun(x);
+
+Error in ezplot>ezparam (line 405)
+            Y = ezplotfeval(y, T);
+
+Error in ezplot (line 179)
+        hp = ezparam(cax, f{1}, f{2}, vars, labels, args{2:end});
+
+Error in sym/ezplot (line 72)
+      h = ezplot(fhandle(f),fhandle(y));%#ok<EZPLT>
+ 
+>> ezplot(izt,[-12,-5])
+>> x=-6:0.01:6
+
+x =
+
+  Columns 1 through 8
+
+   -6.0000   -5.9900   -5.9800   -5.9700   -5.9600   -5.9500   -5.9400   -5.9300
+
+  Columns 9 through 16
+
+   -5.9200   -5.9100   -5.9000   -5.8900   -5.8800   -5.8700   -5.8600   -5.8500
+
+  Columns 17 through 24
+
+   -5.8400   -5.8300   -5.8200   -5.8100   -5.8000   -5.7900   -5.7800   -5.7700
+
+  Columns 25 through 32
+
+   -5.7600   -5.7500   -5.7400   -5.7300   -5.7200   -5.7100   -5.7000   -5.6900
+
+  Columns 33 through 40
+
+   -5.6800   -5.6700   -5.6600   -5.6500   -5.6400   -5.6300   -5.6200   -5.6100
+
+  Columns 41 through 48
+
+   -5.6000   -5.5900   -5.5800   -5.5700   -5.5600   -5.5500   -5.5400   -5.5300
+
+  Columns 49 through 56
+
+   -5.5200   -5.5100   -5.5000   -5.4900   -5.4800   -5.4700   -5.4600   -5.4500
+
+  Columns 57 through 64
+
+   -5.4400   -5.4300   -5.4200   -5.4100   -5.4000   -5.3900   -5.3800   -5.3700
+
+  Columns 65 through 72
+
+   -5.3600   -5.3500   -5.3400   -5.3300   -5.3200   -5.3100   -5.3000   -5.2900
+
+  Columns 73 through 80
+
+   -5.2800   -5.2700   -5.2600   -5.2500   -5.2400   -5.2300   -5.2200   -5.2100
+
+  Columns 81 through 88
+
+   -5.2000   -5.1900   -5.1800   -5.1700   -5.1600   -5.1500   -5.1400   -5.1300
+
+  Columns 89 through 96
+
+   -5.1200   -5.1100   -5.1000   -5.0900   -5.0800   -5.0700   -5.0600   -5.0500
+
+  Columns 97 through 104
+
+   -5.0400   -5.0300   -5.0200   -5.0100   -5.0000   -4.9900   -4.9800   -4.9700
+
+  Columns 105 through 112
+
+   -4.9600   -4.9500   -4.9400   -4.9300   -4.9200   -4.9100   -4.9000   -4.8900
+
+  Columns 113 through 120
+
+   -4.8800   -4.8700   -4.8600   -4.8500   -4.8400   -4.8300   -4.8200   -4.8100
+
+  Columns 121 through 128
+
+   -4.8000   -4.7900   -4.7800   -4.7700   -4.7600   -4.7500   -4.7400   -4.7300
+
+  Columns 129 through 136
+
+   -4.7200   -4.7100   -4.7000   -4.6900   -4.6800   -4.6700   -4.6600   -4.6500
+
+  Columns 137 through 144
+
+   -4.6400   -4.6300   -4.6200   -4.6100   -4.6000   -4.5900   -4.5800   -4.5700
+
+  Columns 145 through 152
+
+   -4.5600   -4.5500   -4.5400   -4.5300   -4.5200   -4.5100   -4.5000   -4.4900
+
+  Columns 153 through 160
+
+   -4.4800   -4.4700   -4.4600   -4.4500   -4.4400   -4.4300   -4.4200   -4.4100
+
+  Columns 161 through 168
+
+   -4.4000   -4.3900   -4.3800   -4.3700   -4.3600   -4.3500   -4.3400   -4.3300
+
+  Columns 169 through 176
+
+   -4.3200   -4.3100   -4.3000   -4.2900   -4.2800   -4.2700   -4.2600   -4.2500
+
+  Columns 177 through 184
+
+   -4.2400   -4.2300   -4.2200   -4.2100   -4.2000   -4.1900   -4.1800   -4.1700
+
+  Columns 185 through 192
+
+   -4.1600   -4.1500   -4.1400   -4.1300   -4.1200   -4.1100   -4.1000   -4.0900
+
+  Columns 193 through 200
+
+   -4.0800   -4.0700   -4.0600   -4.0500   -4.0400   -4.0300   -4.0200   -4.0100
+
+  Columns 201 through 208
+
+   -4.0000   -3.9900   -3.9800   -3.9700   -3.9600   -3.9500   -3.9400   -3.9300
+
+  Columns 209 through 216
+
+   -3.9200   -3.9100   -3.9000   -3.8900   -3.8800   -3.8700   -3.8600   -3.8500
+
+  Columns 217 through 224
+
+   -3.8400   -3.8300   -3.8200   -3.8100   -3.8000   -3.7900   -3.7800   -3.7700
+
+  Columns 225 through 232
+
+   -3.7600   -3.7500   -3.7400   -3.7300   -3.7200   -3.7100   -3.7000   -3.6900
+
+  Columns 233 through 240
+
+   -3.6800   -3.6700   -3.6600   -3.6500   -3.6400   -3.6300   -3.6200   -3.6100
+
+  Columns 241 through 248
+
+   -3.6000   -3.5900   -3.5800   -3.5700   -3.5600   -3.5500   -3.5400   -3.5300
+
+  Columns 249 through 256
+
+   -3.5200   -3.5100   -3.5000   -3.4900   -3.4800   -3.4700   -3.4600   -3.4500
+
+  Columns 257 through 264
+
+   -3.4400   -3.4300   -3.4200   -3.4100   -3.4000   -3.3900   -3.3800   -3.3700
+
+  Columns 265 through 272
+
+   -3.3600   -3.3500   -3.3400   -3.3300   -3.3200   -3.3100   -3.3000   -3.2900
+
+  Columns 273 through 280
+
+   -3.2800   -3.2700   -3.2600   -3.2500   -3.2400   -3.2300   -3.2200   -3.2100
+
+  Columns 281 through 288
+
+   -3.2000   -3.1900   -3.1800   -3.1700   -3.1600   -3.1500   -3.1400   -3.1300
+
+  Columns 289 through 296
+
+   -3.1200   -3.1100   -3.1000   -3.0900   -3.0800   -3.0700   -3.0600   -3.0500
+
+  Columns 297 through 304
+
+   -3.0400   -3.0300   -3.0200   -3.0100   -3.0000   -2.9900   -2.9800   -2.9700
+
+  Columns 305 through 312
+
+   -2.9600   -2.9500   -2.9400   -2.9300   -2.9200   -2.9100   -2.9000   -2.8900
+
+  Columns 313 through 320
+
+   -2.8800   -2.8700   -2.8600   -2.8500   -2.8400   -2.8300   -2.8200   -2.8100
+
+  Columns 321 through 328
+
+   -2.8000   -2.7900   -2.7800   -2.7700   -2.7600   -2.7500   -2.7400   -2.7300
+
+  Columns 329 through 336
+
+   -2.7200   -2.7100   -2.7000   -2.6900   -2.6800   -2.6700   -2.6600   -2.6500
+
+  Columns 337 through 344
+
+   -2.6400   -2.6300   -2.6200   -2.6100   -2.6000   -2.5900   -2.5800   -2.5700
+
+  Columns 345 through 352
+
+   -2.5600   -2.5500   -2.5400   -2.5300   -2.5200   -2.5100   -2.5000   -2.4900
+
+  Columns 353 through 360
+
+   -2.4800   -2.4700   -2.4600   -2.4500   -2.4400   -2.4300   -2.4200   -2.4100
+
+  Columns 361 through 368
+
+   -2.4000   -2.3900   -2.3800   -2.3700   -2.3600   -2.3500   -2.3400   -2.3300
+
+  Columns 369 through 376
+
+   -2.3200   -2.3100   -2.3000   -2.2900   -2.2800   -2.2700   -2.2600   -2.2500
+
+  Columns 377 through 384
+
+   -2.2400   -2.2300   -2.2200   -2.2100   -2.2000   -2.1900   -2.1800   -2.1700
+
+  Columns 385 through 392
+
+   -2.1600   -2.1500   -2.1400   -2.1300   -2.1200   -2.1100   -2.1000   -2.0900
+
+  Columns 393 through 400
+
+   -2.0800   -2.0700   -2.0600   -2.0500   -2.0400   -2.0300   -2.0200   -2.0100
+
+  Columns 401 through 408
+
+   -2.0000   -1.9900   -1.9800   -1.9700   -1.9600   -1.9500   -1.9400   -1.9300
+
+  Columns 409 through 416
+
+   -1.9200   -1.9100   -1.9000   -1.8900   -1.8800   -1.8700   -1.8600   -1.8500
+
+  Columns 417 through 424
+
+   -1.8400   -1.8300   -1.8200   -1.8100   -1.8000   -1.7900   -1.7800   -1.7700
+
+  Columns 425 through 432
+
+   -1.7600   -1.7500   -1.7400   -1.7300   -1.7200   -1.7100   -1.7000   -1.6900
+
+  Columns 433 through 440
+
+   -1.6800   -1.6700   -1.6600   -1.6500   -1.6400   -1.6300   -1.6200   -1.6100
+
+  Columns 441 through 448
+
+   -1.6000   -1.5900   -1.5800   -1.5700   -1.5600   -1.5500   -1.5400   -1.5300
+
+  Columns 449 through 456
+
+   -1.5200   -1.5100   -1.5000   -1.4900   -1.4800   -1.4700   -1.4600   -1.4500
+
+  Columns 457 through 464
+
+   -1.4400   -1.4300   -1.4200   -1.4100   -1.4000   -1.3900   -1.3800   -1.3700
+
+  Columns 465 through 472
+
+   -1.3600   -1.3500   -1.3400   -1.3300   -1.3200   -1.3100   -1.3000   -1.2900
+
+  Columns 473 through 480
+
+   -1.2800   -1.2700   -1.2600   -1.2500   -1.2400   -1.2300   -1.2200   -1.2100
+
+  Columns 481 through 488
+
+   -1.2000   -1.1900   -1.1800   -1.1700   -1.1600   -1.1500   -1.1400   -1.1300
+
+  Columns 489 through 496
+
+   -1.1200   -1.1100   -1.1000   -1.0900   -1.0800   -1.0700   -1.0600   -1.0500
+
+  Columns 497 through 504
+
+   -1.0400   -1.0300   -1.0200   -1.0100   -1.0000   -0.9900   -0.9800   -0.9700
+
+  Columns 505 through 512
+
+   -0.9600   -0.9500   -0.9400   -0.9300   -0.9200   -0.9100   -0.9000   -0.8900
+
+  Columns 513 through 520
+
+   -0.8800   -0.8700   -0.8600   -0.8500   -0.8400   -0.8300   -0.8200   -0.8100
+
+  Columns 521 through 528
+
+   -0.8000   -0.7900   -0.7800   -0.7700   -0.7600   -0.7500   -0.7400   -0.7300
+
+  Columns 529 through 536
+
+   -0.7200   -0.7100   -0.7000   -0.6900   -0.6800   -0.6700   -0.6600   -0.6500
+
+  Columns 537 through 544
+
+   -0.6400   -0.6300   -0.6200   -0.6100   -0.6000   -0.5900   -0.5800   -0.5700
+
+  Columns 545 through 552
+
+   -0.5600   -0.5500   -0.5400   -0.5300   -0.5200   -0.5100   -0.5000   -0.4900
+
+  Columns 553 through 560
+
+   -0.4800   -0.4700   -0.4600   -0.4500   -0.4400   -0.4300   -0.4200   -0.4100
+
+  Columns 561 through 568
+
+   -0.4000   -0.3900   -0.3800   -0.3700   -0.3600   -0.3500   -0.3400   -0.3300
+
+  Columns 569 through 576
+
+   -0.3200   -0.3100   -0.3000   -0.2900   -0.2800   -0.2700   -0.2600   -0.2500
+
+  Columns 577 through 584
+
+   -0.2400   -0.2300   -0.2200   -0.2100   -0.2000   -0.1900   -0.1800   -0.1700
+
+  Columns 585 through 592
+
+   -0.1600   -0.1500   -0.1400   -0.1300   -0.1200   -0.1100   -0.1000   -0.0900
+
+  Columns 593 through 600
+
+   -0.0800   -0.0700   -0.0600   -0.0500   -0.0400   -0.0300   -0.0200   -0.0100
+
+  Columns 601 through 608
+
+         0    0.0100    0.0200    0.0300    0.0400    0.0500    0.0600    0.0700
+
+  Columns 609 through 616
+
+    0.0800    0.0900    0.1000    0.1100    0.1200    0.1300    0.1400    0.1500
+
+  Columns 617 through 624
+
+    0.1600    0.1700    0.1800    0.1900    0.2000    0.2100    0.2200    0.2300
+
+  Columns 625 through 632
+
+    0.2400    0.2500    0.2600    0.2700    0.2800    0.2900    0.3000    0.3100
+
+  Columns 633 through 640
+
+    0.3200    0.3300    0.3400    0.3500    0.3600    0.3700    0.3800    0.3900
+
+  Columns 641 through 648
+
+    0.4000    0.4100    0.4200    0.4300    0.4400    0.4500    0.4600    0.4700
+
+  Columns 649 through 656
+
+    0.4800    0.4900    0.5000    0.5100    0.5200    0.5300    0.5400    0.5500
+
+  Columns 657 through 664
+
+    0.5600    0.5700    0.5800    0.5900    0.6000    0.6100    0.6200    0.6300
+
+  Columns 665 through 672
+
+    0.6400    0.6500    0.6600    0.6700    0.6800    0.6900    0.7000    0.7100
+
+  Columns 673 through 680
+
+    0.7200    0.7300    0.7400    0.7500    0.7600    0.7700    0.7800    0.7900
+
+  Columns 681 through 688
+
+    0.8000    0.8100    0.8200    0.8300    0.8400    0.8500    0.8600    0.8700
+
+  Columns 689 through 696
+
+    0.8800    0.8900    0.9000    0.9100    0.9200    0.9300    0.9400    0.9500
+
+  Columns 697 through 704
+
+    0.9600    0.9700    0.9800    0.9900    1.0000    1.0100    1.0200    1.0300
+
+  Columns 705 through 712
+
+    1.0400    1.0500    1.0600    1.0700    1.0800    1.0900    1.1000    1.1100
+
+  Columns 713 through 720
+
+    1.1200    1.1300    1.1400    1.1500    1.1600    1.1700    1.1800    1.1900
+
+  Columns 721 through 728
+
+    1.2000    1.2100    1.2200    1.2300    1.2400    1.2500    1.2600    1.2700
+
+  Columns 729 through 736
+
+    1.2800    1.2900    1.3000    1.3100    1.3200    1.3300    1.3400    1.3500
+
+  Columns 737 through 744
+
+    1.3600    1.3700    1.3800    1.3900    1.4000    1.4100    1.4200    1.4300
+
+  Columns 745 through 752
+
+    1.4400    1.4500    1.4600    1.4700    1.4800    1.4900    1.5000    1.5100
+
+  Columns 753 through 760
+
+    1.5200    1.5300    1.5400    1.5500    1.5600    1.5700    1.5800    1.5900
+
+  Columns 761 through 768
+
+    1.6000    1.6100    1.6200    1.6300    1.6400    1.6500    1.6600    1.6700
+
+  Columns 769 through 776
+
+    1.6800    1.6900    1.7000    1.7100    1.7200    1.7300    1.7400    1.7500
+
+  Columns 777 through 784
+
+    1.7600    1.7700    1.7800    1.7900    1.8000    1.8100    1.8200    1.8300
+
+  Columns 785 through 792
+
+    1.8400    1.8500    1.8600    1.8700    1.8800    1.8900    1.9000    1.9100
+
+  Columns 793 through 800
+
+    1.9200    1.9300    1.9400    1.9500    1.9600    1.9700    1.9800    1.9900
+
+  Columns 801 through 808
+
+    2.0000    2.0100    2.0200    2.0300    2.0400    2.0500    2.0600    2.0700
+
+  Columns 809 through 816
+
+    2.0800    2.0900    2.1000    2.1100    2.1200    2.1300    2.1400    2.1500
+
+  Columns 817 through 824
+
+    2.1600    2.1700    2.1800    2.1900    2.2000    2.2100    2.2200    2.2300
+
+  Columns 825 through 832
+
+    2.2400    2.2500    2.2600    2.2700    2.2800    2.2900    2.3000    2.3100
+
+  Columns 833 through 840
+
+    2.3200    2.3300    2.3400    2.3500    2.3600    2.3700    2.3800    2.3900
+
+  Columns 841 through 848
+
+    2.4000    2.4100    2.4200    2.4300    2.4400    2.4500    2.4600    2.4700
+
+  Columns 849 through 856
+
+    2.4800    2.4900    2.5000    2.5100    2.5200    2.5300    2.5400    2.5500
+
+  Columns 857 through 864
+
+    2.5600    2.5700    2.5800    2.5900    2.6000    2.6100    2.6200    2.6300
+
+  Columns 865 through 872
+
+    2.6400    2.6500    2.6600    2.6700    2.6800    2.6900    2.7000    2.7100
+
+  Columns 873 through 880
+
+    2.7200    2.7300    2.7400    2.7500    2.7600    2.7700    2.7800    2.7900
+
+  Columns 881 through 888
+
+    2.8000    2.8100    2.8200    2.8300    2.8400    2.8500    2.8600    2.8700
+
+  Columns 889 through 896
+
+    2.8800    2.8900    2.9000    2.9100    2.9200    2.9300    2.9400    2.9500
+
+  Columns 897 through 904
+
+    2.9600    2.9700    2.9800    2.9900    3.0000    3.0100    3.0200    3.0300
+
+  Columns 905 through 912
+
+    3.0400    3.0500    3.0600    3.0700    3.0800    3.0900    3.1000    3.1100
+
+  Columns 913 through 920
+
+    3.1200    3.1300    3.1400    3.1500    3.1600    3.1700    3.1800    3.1900
+
+  Columns 921 through 928
+
+    3.2000    3.2100    3.2200    3.2300    3.2400    3.2500    3.2600    3.2700
+
+  Columns 929 through 936
+
+    3.2800    3.2900    3.3000    3.3100    3.3200    3.3300    3.3400    3.3500
+
+  Columns 937 through 944
+
+    3.3600    3.3700    3.3800    3.3900    3.4000    3.4100    3.4200    3.4300
+
+  Columns 945 through 952
+
+    3.4400    3.4500    3.4600    3.4700    3.4800    3.4900    3.5000    3.5100
+
+  Columns 953 through 960
+
+    3.5200    3.5300    3.5400    3.5500    3.5600    3.5700    3.5800    3.5900
+
+  Columns 961 through 968
+
+    3.6000    3.6100    3.6200    3.6300    3.6400    3.6500    3.6600    3.6700
+
+  Columns 969 through 976
+
+    3.6800    3.6900    3.7000    3.7100    3.7200    3.7300    3.7400    3.7500
+
+  Columns 977 through 984
+
+    3.7600    3.7700    3.7800    3.7900    3.8000    3.8100    3.8200    3.8300
+
+  Columns 985 through 992
+
+    3.8400    3.8500    3.8600    3.8700    3.8800    3.8900    3.9000    3.9100
+
+  Columns 993 through 1000
+
+    3.9200    3.9300    3.9400    3.9500    3.9600    3.9700    3.9800    3.9900
+
+  Columns 1001 through 1008
+
+    4.0000    4.0100    4.0200    4.0300    4.0400    4.0500    4.0600    4.0700
+
+  Columns 1009 through 1016
+
+    4.0800    4.0900    4.1000    4.1100    4.1200    4.1300    4.1400    4.1500
+
+  Columns 1017 through 1024
+
+    4.1600    4.1700    4.1800    4.1900    4.2000    4.2100    4.2200    4.2300
+
+  Columns 1025 through 1032
+
+    4.2400    4.2500    4.2600    4.2700    4.2800    4.2900    4.3000    4.3100
+
+  Columns 1033 through 1040
+
+    4.3200    4.3300    4.3400    4.3500    4.3600    4.3700    4.3800    4.3900
+
+  Columns 1041 through 1048
+
+    4.4000    4.4100    4.4200    4.4300    4.4400    4.4500    4.4600    4.4700
+
+  Columns 1049 through 1056
+
+    4.4800    4.4900    4.5000    4.5100    4.5200    4.5300    4.5400    4.5500
+
+  Columns 1057 through 1064
+
+    4.5600    4.5700    4.5800    4.5900    4.6000    4.6100    4.6200    4.6300
+
+  Columns 1065 through 1072
+
+    4.6400    4.6500    4.6600    4.6700    4.6800    4.6900    4.7000    4.7100
+
+  Columns 1073 through 1080
+
+    4.7200    4.7300    4.7400    4.7500    4.7600    4.7700    4.7800    4.7900
+
+  Columns 1081 through 1088
+
+    4.8000    4.8100    4.8200    4.8300    4.8400    4.8500    4.8600    4.8700
+
+  Columns 1089 through 1096
+
+    4.8800    4.8900    4.9000    4.9100    4.9200    4.9300    4.9400    4.9500
+
+  Columns 1097 through 1104
+
+    4.9600    4.9700    4.9800    4.9900    5.0000    5.0100    5.0200    5.0300
+
+  Columns 1105 through 1112
+
+    5.0400    5.0500    5.0600    5.0700    5.0800    5.0900    5.1000    5.1100
+
+  Columns 1113 through 1120
+
+    5.1200    5.1300    5.1400    5.1500    5.1600    5.1700    5.1800    5.1900
+
+  Columns 1121 through 1128
+
+    5.2000    5.2100    5.2200    5.2300    5.2400    5.2500    5.2600    5.2700
+
+  Columns 1129 through 1136
+
+    5.2800    5.2900    5.3000    5.3100    5.3200    5.3300    5.3400    5.3500
+
+  Columns 1137 through 1144
+
+    5.3600    5.3700    5.3800    5.3900    5.4000    5.4100    5.4200    5.4300
+
+  Columns 1145 through 1152
+
+    5.4400    5.4500    5.4600    5.4700    5.4800    5.4900    5.5000    5.5100
+
+  Columns 1153 through 1160
+
+    5.5200    5.5300    5.5400    5.5500    5.5600    5.5700    5.5800    5.5900
+
+  Columns 1161 through 1168
+
+    5.6000    5.6100    5.6200    5.6300    5.6400    5.6500    5.6600    5.6700
+
+  Columns 1169 through 1176
+
+    5.6800    5.6900    5.7000    5.7100    5.7200    5.7300    5.7400    5.7500
+
+  Columns 1177 through 1184
+
+    5.7600    5.7700    5.7800    5.7900    5.8000    5.8100    5.8200    5.8300
+
+  Columns 1185 through 1192
+
+    5.8400    5.8500    5.8600    5.8700    5.8800    5.8900    5.9000    5.9100
+
+  Columns 1193 through 1200
+
+    5.9200    5.9300    5.9400    5.9500    5.9600    5.9700    5.9800    5.9900
+
+  Column 1201
+
+    6.0000
+
+>> whos
+  Name           Size              Bytes  Class     Attributes
+
+  a              1x1                   8  sym                 
+  ans            1x1                   8  sym                 
+  f              1x1                   8  sym                 
+  izt            1x1                   8  sym                 
+  t              1x3                  24  double              
+  x              1x1201             9608  double              
+  xclear         1x1                   8  sym                 
+  xpositive      1x1                   8  sym                 
+  xreal          1x1                   8  sym                 
+
+>> y=(x.^2-5)./(x-1);
+>> vectorize(izt)
+
+ans =
+
+    '(x.^2 - 5)./(x - 1)'
+
+>> y=(x.^2-5)./(x-1);
+>> plot(x,y)
+>> x=linspace(-6,6,1000);
+>> length(x)
+
+ans =
+
+        1000
+
+>> eval('syms x')
+>> teksts = 'x=5';
+>> eval(teksts)
+
+x =
+
+     5
+
+>> y=eval(izt);
+>> plot(x,y)
+>> izt
+ 
+izt =
+ 
+(x^2 - 5)/(x - 1)
+ 
+>> plot(x,y)
+>> y=eval(vectorize(izt))
+
+y =
+
+     5
+
+>> plot(x,y)
+>> plot(x,y,[-6,6])
+Error using plot
+Data must be a single matrix Y or a list of pairs X,Y.
+ 
+>> plot(x,y)
+>> syms x
+>> izt=(x^2-5)/(x-1)^2
+ 
+izt =
+ 
+(x^2 - 5)/(x - 1)^2
+ 
+>> izt_d = diff(izt)
+ 
+izt_d =
+ 
+(2*x)/(x - 1)^2 - (2*(x^2 - 5))/(x - 1)^3
+ 
+>> collect(izt_d)
+ 
+ans =
+ 
+(10 - 2*x)/(x^3 - 3*x^2 + 3*x - 1)
+ 
+>> pretty(izt_d)
+               2
+   2 x     2 (x  - 5)
+-------- - ----------
+       2           3
+(x - 1)     (x - 1)
+
+>> x=linspace(-6,6,1000);
+>> whos x
+  Name      Size              Bytes  Class     Attributes
+
+  x         1x1000             8000  double              
+
+>> y=eval(vectorize(izt));
+>> whos y
+  Name      Size              Bytes  Class     Attributes
+
+  y         1x1000             8000  double              
+
+>> plot(x,y)
+>> solve(izt_d)
+ 
+ans =
+ 
+5
+ 
+>> latex(izt_d)
+
+ans =
+
+    '\frac{2\,x}{{\left(x-1\right)}^2}-\frac{2\,\left(x^2-5\right)}{{\left(x-1\right)}^3}'
+
+>> syms x
+>> izt = ((x^3-7)/x^2)+3;
+>> solve(izt)
+ 
+ans =
+ 
+ root(z^3 + 3*z^2 - 7, z, 1)
+ root(z^3 + 3*z^2 - 7, z, 2)
+ root(z^3 + 3*z^2 - 7, z, 3)
+ 
+>> diff(izt)
+ 
+ans =
+ 
+3 - (2*(x^3 - 7))/x^3
+ 
+>> int(izt)
+ 
+ans =
+ 
+(x^3 + 6*x^2 + 14)/(2*x)
+ 
+>> limit(izt)
+ 
+ans =
+ 
+-Inf
+ 
+>> 
