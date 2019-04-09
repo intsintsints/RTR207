@@ -1,0 +1,27 @@
+function y = funkcija(t)
+
+
+
+t1=t(t<=0.5);
+t2=t(t>0.5 & t<=1);
+t3=t(t>1 & t<=2.5);
+t4=t(t>2.5 & t<=3);
+t5=t(t>3 & t<3.5);
+
+f2=8;
+
+y1 = zeros(size(t1));
+y2 = 0.5*rand(size(t2))-0.25;
+k = -2; deltaT=2.5;
+y3=k*(t3-deltaT);
+y4 = zeros(size(t4))+0.5;
+y5 = 0.5*sin(pi*(t5)*f2);
+
+t=[t1,t2,t3,t4,t5];
+y=[y1,y2,y3,y4,y5];
+
+plot(t,y)
+grid on 
+xlabel ('X')
+ylabel ('Y')
+axis([0, 4, -1.5, 3.5])
