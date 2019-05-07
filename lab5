@@ -1,0 +1,62 @@
+%Ein=Ud+Ur
+% ir = Ur/R
+% id = i0*(exp(a*Ud)-1) (tas, kas labd dots)
+% id = i0*(exp(a*(Ein-Ur))-1)
+% i0*(exp(a*(Ein-Ur))-1)-Ur/R = 0
+global Ein i0 a R;
+
+%Ein = 100;
+i0=7e-3;
+a=1;
+R=10;
+
+t=0:0.01:1;
+eint = 100*sin(2*pi*t*2);
+Urt=[];
+%funx(10);
+%fund(98.1);
+
+for Ein = eint;
+ur= newmet('funx','fund');
+Urt=[Urt,ur];
+end
+
+plot(t, eint, t, Urt, 'r--')
+
+
+
+
+
+
+
+
+function fx = funx(Ur)
+global Ein i0 a R;
+
+fx=i0*(exp(a*(Ein-Ur))-1)-Ur/R; 
+
+
+
+
+
+function dfx=fund(Ur)
+global Ein i0 a R;
+dfx=-1/R - a*i0*exp(a*(Ein - Ur));
+
+
+
+
+
+function x = newmet(fx ,dfx)
+
+x0=0;
+epsi = 1e-3;
+
+x=x0;
+delta = feval(fx,x)/feval(dfx,x);
+
+while (abs(delta)>epsi)
+   delta = feval(fx,x)/feval(dfx,x);
+   x=x-delta;
+end
+
