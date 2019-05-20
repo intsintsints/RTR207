@@ -1,0 +1,17 @@
+syms x
+g1=double(int(0*x,x,0,0.5));
+g2=double(int(0,x,0.5,1));
+g3=double(int(-2*(x-2.5),x,1,2.5));
+g4=double(int((0.5+x),x,2.5,3));
+g5=double(int(0.5*sin(pi*x*8),x,3,3.5));
+
+
+vid=(g1+g2+g3+g4+g5)/5
+
+t=0:0.01:3.5;
+plot(t, funkcija(t),t, vid*ones(size(t)),'r--')
+
+h=0.01;
+m=0:h:3.5;
+vid_t=(1/(length(m)-1))*sum( funkcija(m(1:end-1)))
+
